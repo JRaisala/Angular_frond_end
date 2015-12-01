@@ -1,0 +1,52 @@
+/*tyylit leipätekstille jne */
+
+p {
+        color: greenyellow;
+        font-size: 32px;
+}
+
+/* tyylit classeille */
+
+
+
+.luokka1 {
+    background-color: red;
+}
+
+.fancy {
+    color: green;
+    border: 2px;
+    background-color: aquamarine;
+    border-radius: 8px;
+} 
+
+
+/* tyylit id:lle */
+
+#omaID1  {
+    margin:100px;
+}
+
+div:first-child{
+   color:blue;
+}
+
+[class=fancy]{
+  background-color: red;
+}
+
+#myForm {
+  margin:100px;
+  width:300px;
+}
+
+.login_container {
+    width:500px;
+    margin:8px auto;
+    border:2px solid black;
+    border-radius:5px;
+    background-color:darksalmon;
+    padding:8px;
+}
+
+
