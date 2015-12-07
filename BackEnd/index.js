@@ -10,6 +10,7 @@ var app = express();
 //=====================Middlewares========================
 //Bodyparser json() middleware parses the json object
 //from HTTP POST request
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(function(req,res,next){
     
@@ -32,8 +33,10 @@ app.use('/FrontEnd/module',express.static(path.join(__dirname, '../FrontEnd/modu
 app.use('/FrontEnd/controllers',express.static(path.join(__dirname, '../FrontEnd/controllers')));
 app.use('/FrontEnd/factories',express.static(path.join(__dirname, '../FrontEnd/factories')));
 
+
 app.use('/persons',person);
 app.use('/friends',user);
+
 
 //=====================ROUTERS============================
 

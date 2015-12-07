@@ -142,7 +142,7 @@ exports.loginFriend = function(req,res){
         
         if(err){
             
-            res.send({status:err.message});
+            res.send(502,{status:err.message});
             
         }else{
             //=< 0 means wrong username or password
@@ -150,7 +150,7 @@ exports.loginFriend = function(req,res){
                 res.send({status:"Ok"});
             }
             else{
-                res.send({status:"Wrong username or password"});
+                res.send(401,{status:"Wrong username or password"});
             }
             
         }

@@ -4,7 +4,7 @@
 //name when you want to use this controller in some view
 //The $scope object is the glue between the view and controller. You use this object to transfer
 //data between the view and controller
-main_module.controller('controllerLogin', function($scope, loginFactory){
+main_module.controller('controllerLogin', function($scope, loginFactory,$location){
   
   //var user = $scope.user; 
   //$scope.pass = "halituli"
@@ -14,6 +14,26 @@ main_module.controller('controllerLogin', function($scope, loginFactory){
   $scope.loginClicked = function(){
     
     console.log('Login was pressed');
+  
+        var temp = {
+        username:$scope.user,
+        password:$scope.password
+    }
+    
+        
+   var waitPromise = loginFactory.startLogin(temp);
+    //wait the response from server
+    
+    waitPromise.then(function(data){
+      console.log('Success');
+      $location.path('/list');
+    
+        //code inside this block will be called when success response
+        //from server receives
+                     
+      },function error(data){
+            $(',error').text('Wrong username or password!');   
+        });
   }
   
   $scope.registerClicked = function(){

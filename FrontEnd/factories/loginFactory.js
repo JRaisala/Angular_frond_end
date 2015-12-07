@@ -1,19 +1,18 @@
-main_module.factory('loginFactory', function(){
+main_module.factory('loginFactory', function($resource){
 
-  var factory = ();
+  var factory = {};
   
   //This factory can be called from any controller using this factory
   //implementation
-  factory.startlogin = function(data){
+  factory.startLogin = function(data){
   
+     console.log('loginFactory');
     console.log(data);
-    
-    var temp = {
-        username:$scope.user,
-        password:$scope.password
-    }
-    
-    loginFactory.startLogin(temp);
+    //create a resource for context 'friends/login'
+    var req = $resource('/friends/login',{},{'post':{method:'POST'}});
+    //Use POST method to send the username and password to above context
+    //Note that we return an promise object from here
+    return req.post(data).$promise;
     
   }
   
