@@ -1,21 +1,21 @@
 {
-  "name": "Angular_frond_end",
+  "name": "html5view",
   "version": "0.0.1",
-  "description": "Example of using Angular template engine",
+  "description": "RESTful server for person app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JRaisala/Angular_frond_end.git"
+    "url": "git+https://github.com/maukka76/HTML5View.git"
   },
-  "author": "Juha Räisälä",
+  "author": "Markus Veijola",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JRaisala/Angular_frond_end/issues"
+    "url": "https://github.com/maukka76/HTML5View/issues"
   },
-  "homepage": "https://github.com/JRaisala/Angular_frond_end#readme",
+  "homepage": "https://github.com/maukka76/HTML5View#readme",
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "^4.13.3",

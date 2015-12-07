@@ -171,5 +171,3 @@ exports.getFriendsByUsername = function(req,res){
 }
 
 
-
-

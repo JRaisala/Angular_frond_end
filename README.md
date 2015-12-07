@@ -1,2 +1,2 @@
-# Angular_frond_end
-Example of using Angular template engine
+# Angular_front_end
+Exampe of using angular template engine

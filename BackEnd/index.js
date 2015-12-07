@@ -24,19 +24,19 @@ app.use(function(req,res,next){
     next();
 });
 
-//Define middleware for our statis files
-//(.html,.css,.js files that are loaded by browser when parsing index.html file)
+//Define middlewares for our static files (.html,.css, .js files that are loaded
+//by browser when parsing index.html file)
 app.use('/',express.static(path.join(__dirname, '../FrontEnd/views')));
 app.use('/FrontEnd/css',express.static(path.join(__dirname, '../FrontEnd/css')));
 app.use('/FrontEnd/lib',express.static(path.join(__dirname, '../FrontEnd/lib')));
 app.use('/FrontEnd/module',express.static(path.join(__dirname, '../FrontEnd/module')));
 app.use('/FrontEnd/controllers',express.static(path.join(__dirname, '../FrontEnd/controllers')));
+
 app.use('/FrontEnd/factories',express.static(path.join(__dirname, '../FrontEnd/factories')));
 
-
+//==============================OUR REST API MIDDLEWARES======================================//
 app.use('/persons',person);
 app.use('/friends',user);
-
 
 //=====================ROUTERS============================
 
