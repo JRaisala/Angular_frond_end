@@ -22,33 +22,33 @@ main_module.controller('controllerLogin',function($scope,loginFactory,$location)
         
         //Wait the response from server
         waitPromise.then(function(data){
-            console.log('Success');
             $location.path('/list');
             //code inside this block will be called when success response
             //from server receives
         },function(data){
-            console.log('fail');
-            console.log(data);
             $('.error').text('Wrong username or password!');             
         });
     }
     
-    $scope.registerClicked = (function(){
+    $scope.registerClicked = function(){
         
-        console.log('register was pressed');
-        var temp = {
+         var temp = {
             username:$scope.user,
             password:$scope.pass
+        }
+         
+        var response = loginFactory.startRegister(temp);
+        
+        response.then(success,error)
     }   
-        var response =  loginFactory.startRegister(temp);
-        response.then(success, error)
 });
-  
-  function success(data){
-    alert('New person registered. You can now login with you credentials');
-  }
-   function error(data){
-     alert('Registering person failed!');
-   }
-  
-  });
+
+function success(data){
+    
+    alert('New person registered. You can now login with your credintentials');
+}
+                                     
+function error(data){
+    
+    alert('Registering person failed. Username already in use');
+}

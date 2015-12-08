@@ -25,6 +25,7 @@ exports.getAllPersons = function(req,res){
   */
 exports.saveNewPerson = function(req,res){
     
+    
     var personTemp = new db.Person(req.body);
     //Save it to database
     personTemp.save(function(err,ok){
@@ -93,27 +94,13 @@ exports.findPersonsByName = function(req,res){
     
     var name = req.params.nimi.split("=")[1];
     var username = req.params.username.split("=")[1];
-    console.log(name);
-    console.log(username);
+
     db.Friends.find({username:username}).
         populate({path:'friends',match:{name:{'$regex':'^' + name,'$options':'i'}}}).
             exec(function(err,data){
-        console.log(err);
-        console.log(data);
         res.send(data[0].friends);
     });
     
-    /*
-    db.Person.find({name:{'$regex':'^' + name,'$options':'i'}},function(err,data){
-        
-        if(err){
-            res.send('error');
-        }
-        else{
-            console.log(data);
-            res.send(data);
-        }
-    });*/
 }
 
 exports.registerFriend = function(req,res){
@@ -123,10 +110,10 @@ exports.registerFriend = function(req,res){
         
         if(err){
             
-            res.send(502).send({status:err.message});
+            res.status(500).send({status:err.message});
         }
         else{
-            res.send(200).send({status:"Ok"});
+            res.status(200).send({status:"Ok"});
         }
     });
 }
@@ -137,7 +124,7 @@ exports.loginFriend = function(req,res){
         username:req.body.username,
         password:req.body.password
     }
-    
+
     db.Friends.findOne(searchObject,function(err,data){
         
         if(err){
@@ -145,11 +132,11 @@ exports.loginFriend = function(req,res){
             res.send(502,{status:err.message});
             
         }else{
+            console.log(data);
             //=< 0 means wrong username or password
             if(data){
                 req.session.kayttaja = data.username;
                 res.send(200,{status:"Ok"});
-                
             }
             else{
                 res.send(401,{status:"Wrong username or password"});
@@ -161,24 +148,21 @@ exports.loginFriend = function(req,res){
 
 exports.getFriendsByUsername = function(req,res){
     
-    var usern = req.params.username.split("=")[1];
+    //var usern = req.params.username.split("=")[1];
     db.Friends.findOne({username:req.session.kayttaja}).
         populate('friends').exec(function(err,data){
-            
+                
           if (data){
                 res.send(data.friends);
           }
           else{
-              //res.red:
-              
-      
-      
-            console.log(err);
-            console.log(data[0].friends);
-            res.send(data[0].friends);
-      
+              res.redirect('/');
+       
+      }
         
         });
 }
+
+
 
 

@@ -2,7 +2,7 @@ var query = require('./queries');
 /**
   *This file is a router for User resource
   *Version:0.0.1
-  *Author:Juha Räisälä
+  *Author:Markus Veijola
   *Description:Created this new file
   */
 

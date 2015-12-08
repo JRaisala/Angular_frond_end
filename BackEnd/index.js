@@ -6,8 +6,7 @@ var queries = require('./modules/queries');
 var person = require('./modules/person'); 
 var user = require('./modules/user');
 
-
-//This is used for creating a secret key value
+//This is used for createing a secret key value
 //for our session cookie
 var uuid = require('uuid');
 //This is used to create a session object for client
@@ -19,8 +18,7 @@ var app = express();
 app.use(session({
     secret:uuid.v1(),
     cookie:{maxAge:600000}
-                }));
-
+}));
 //Bodyparser json() middleware parses the json object
 //from HTTP POST request
 app.use(bodyParser.json());
@@ -31,7 +29,7 @@ app.use(function(req,res,next){
     console.log(req.path);
     console.log(__dirname);
     console.log(req.body);
-   console.log(req.session);
+    console.log(req.session);
     //console.log(database.Person);
     //database.myFunction();
     //Send request forward in stack
@@ -53,11 +51,9 @@ app.use('/persons',person);
 app.use('/friends',user);
 
 //=====================ROUTERS============================
-app.get('/logout'),function(req,res){
+app.get(('/logout'),function(req,res){
   req.session.destroy();
   res.redirect('/');
 });
-
-}
 
 app.listen(3000);
