@@ -16,6 +16,13 @@ main_module.factory('loginFactory',function($resource){
         return req.post(data).$promise;
     }
     
+    factory.startRegister = function(data){
+      
+    var req = $resource('/friends/register',{},{'post':{method:'POST'}});
+
+        return req.post(data).$promise;
+      }
+    
     //Factory must always return an object!!!!
     return factory;
     

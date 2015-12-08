@@ -33,8 +33,22 @@ main_module.controller('controllerLogin',function($scope,loginFactory,$location)
         });
     }
     
-    $scope.registerClicked = function(){
+    $scope.registerClicked = (function(){
         
         console.log('register was pressed');
+        var temp = {
+            username:$scope.user,
+            password:$scope.pass
     }   
+        var response =  loginFactory.startRegister(temp);
+        response.then(success, error)
 });
+  
+  function success(data){
+    alert('New person registered. You can now login with you credentials');
+  }
+   function error(data){
+     alert('Registering person failed!');
+   }
+  
+  });

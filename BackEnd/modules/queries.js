@@ -123,10 +123,10 @@ exports.registerFriend = function(req,res){
         
         if(err){
             
-            res.send({status:err.message});
+            res.send(502).send({status:err.message});
         }
         else{
-            res.send({status:"Ok"});
+            res.send(200).send({status:"Ok"});
         }
     });
 }
@@ -138,7 +138,7 @@ exports.loginFriend = function(req,res){
         password:req.body.password
     }
     
-    db.Friends.find(searchObject,function(err,data){
+    db.Friends.findOne(searchObject,function(err,data){
         
         if(err){
             
@@ -146,8 +146,10 @@ exports.loginFriend = function(req,res){
             
         }else{
             //=< 0 means wrong username or password
-            if(data.length > 0){
-                res.send({status:"Ok"});
+            if(data){
+                req.session.kayttaja = data.username;
+                res.send(200,{status:"Ok"});
+                
             }
             else{
                 res.send(401,{status:"Wrong username or password"});
@@ -160,12 +162,21 @@ exports.loginFriend = function(req,res){
 exports.getFriendsByUsername = function(req,res){
     
     var usern = req.params.username.split("=")[1];
-    db.Friends.find({username:usern}).
+    db.Friends.findOne({username:req.session.kayttaja}).
         populate('friends').exec(function(err,data){
             
+          if (data){
+                res.send(data.friends);
+          }
+          else{
+              //res.red:
+              
+      
+      
             console.log(err);
             console.log(data[0].friends);
             res.send(data[0].friends);
+      
         
         });
 }
