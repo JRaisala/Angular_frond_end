@@ -1,21 +1,8 @@
-<a href="/logout">Edit</a>
-<a href="/logout">Delete</a>
-<a href="/logout">Add</a>
-
-<h1>Here is the tabel data of your friends</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Age</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat='person in friendData'>
-            <td>{{person.name}}</td>
-            <td>{{person.address}}</td>
-            <td>{{person.age}}</td>
-        </tr>
-    </tbody>
-</table>
+<form class='loginForm'>
+    <h3>Edit and save information</h3>
+    <!--ng-model directive is the way to tarnsfer data to controller -->
+    <input class="form-control" type="text" placeholder="name" ng-model="name"><br/>
+    <input class="form-control" type="text" placeholder="address" ng-model='address'><br/>
+    <input class="form-control" type="text" placeholder="age" ng-model='age'><br/>
+    <input class="btn btn-default" type="button" value="Save" ng-click='savePerson()'>
+</form>
