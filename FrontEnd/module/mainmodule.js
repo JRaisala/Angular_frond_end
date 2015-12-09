@@ -17,6 +17,9 @@ main_module.config(function($routeProvider){
         
         templateUrl:'partial_dataView.html',
         controller:'friendDataController'
+    }).when('/edit',{
+        
+        templateUrl:'partial_editView.html',
+        controller:'editController'
     });
-    
 });

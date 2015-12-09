@@ -17,4 +17,7 @@ main_module.controller('friendDataController',function($scope,friendDataFactory)
         
         $scope.friendData = friendDataFactory.friendsArray;
     }
+
 });
+
+    
