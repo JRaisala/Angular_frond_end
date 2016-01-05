@@ -9,13 +9,16 @@ function loginRequired($q, $resource, $location){
     
     //Create a promise
     var deferred = $q.defer();
-    $resource('/isLogged').query().$promise.then(function success(){
+    $resource('/isLogged').query().$promise.then(
+        //Success
+        function(){
         //Mark the promise to be solved (or resolved) 
         deferred.resolve();
         return deferred;
-        
-    },function fail(){
-    
+         
+    },
+        //Fail
+        function(){
         //Mark promise to be failed
         deferred.reject();
         // Go back to root context

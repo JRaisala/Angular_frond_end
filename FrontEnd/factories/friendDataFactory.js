@@ -9,6 +9,9 @@ main_module.factory('friendDataFactory',function($resource,$http){
     factory.getFriendData = function(callbackFunc){
         
         if(factory.friendsArray.length === 0){
+            //Set your own header in request like this
+            $http.defaults.headers.common['x-access-token'] = sessionStorage['token'];
+            
             var resource = $resource('/friends',{},{'get':{method:'GET'}});
             resource.query().$promise.then(function(data){
                 
@@ -28,12 +31,15 @@ main_module.factory('friendDataFactory',function($resource,$http){
     }
     //Updates the data to back end
     factory.updateData = function(data){
+          $http.defaults.headers.common['x-access-token'] = sessionStorage['token'];
         
         var resource = $resource('/persons',{},{'put':{method:'PUT'}});
         return resource.put(data).$promise;
     }
     
     factory.deleteData = function(data){
+        $http.defaults.headers.common['x-access-token'] = sessionStorage['token'];
+        
         $http.defaults.headers.common['content-type'] = 'application/json'; 
         var resource = $resource('/persons',{},{'delete':{method:'DELETE'}});
         return resource.delete(data).$promise;
@@ -59,6 +65,7 @@ main_module.factory('friendDataFactory',function($resource,$http){
     
     //Updates the data to back end
     factory.insertData = function(data){
+        $http.defaults.headers.common['x-access-token'] = sessionStorage['token'];
         
         var resource = $resource('/persons',{},{'post':{method:'POST'}});
         return resource.post(data).$promise;

@@ -1,18 +1,42 @@
 var express = require("express");
 var path = require("path");
+var https = require('https');
+var fs = require('fs');
 var bodyParser = require("body-parser");
 var database = require('./modules/database');
 var queries = require('./modules/queries');
 var person = require('./modules/person'); 
 var user = require('./modules/user');
 
+var options = {
+    
+    key:fs.readFileSync('server.key'),
+    cert:fs.readFileSync('server.crt'),
+    requestCert:false,
+    rejectUnauthorized:false
+
+}
+
+
 //This is used for createing a secret key value
 //for our session cookie
 var uuid = require('uuid');
+
+//Create secret for our web token
+var secret = uuid.v1();
+
+exports.secret = secret;
+
+
 //This is used to create a session object for client
 var session = require('express-session');
 
 var app = express();
+
+
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
+
 //=====================Middlewares========================
 
 app.use(session({
@@ -23,17 +47,24 @@ app.use(session({
 //from HTTP POST request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 app.use(function(req,res,next){
     
-    //console.log(req.method);
-    //console.log(req.path);
-    //console.log(__dirname);
-    //console.log(req.body);
-    //console.log(req.session);
-    //console.log(database.Person);
-    //database.myFunction();
-    //Send request forward in stack
+    var token = req.body.token || req.query.token || req.header['x-access-token'];
+    //Check if there was a token from request
+    if(token){
+        jwt.verify(token,secret, function(err, decoded) {
+            
+            if(err){
+                return.send(401)
+            }else{
+                req.decoded = decoded;
+                console.log(req,decoded);
+    
     next();
+            }else{
+                res.send(403);
+            }
 });
 
 //Define middlewares for our static files (.html,.css, .js files that are loaded
@@ -54,6 +85,7 @@ app.use('/friends',user);
 
 //=====================ROUTERS============================
 
+
 app.get('/logout',function(req,res){
     
     req.session.destroy();
@@ -72,5 +104,7 @@ app.get('/isLogged',function(req,res){
     }
 });
 
-
-app.listen(3000);
+https.createServer(options,app).listen(app.get('port'), app.get('ip'), function()
+  {
+    console.log("Express seerver started");
+});
