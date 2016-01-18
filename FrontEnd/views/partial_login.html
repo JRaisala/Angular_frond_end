@@ -1,5 +1,12 @@
 
-<form class='loginForm'>
+<ng-include src="'navbar.html'"></ng-include>
+
+
+<of-example></of-example>
+  <div class="container">
+    <div class="row">
+        <div style="background-color:blue;" class="col-sm-12 col-md-6">  
+<form class='loginForm' >
     <h3>Login to friends app</h3>
     <!--ng-model directive is the way to tarnsfer data to controller -->
     <input class="form-control" type="text" placeholder="username" ng-model="user"><br/>
@@ -8,5 +15,17 @@
     <input class="btn btn-default" type="button" value="Register" ng-click='registerClicked()'>
     <!--bind the data from username textfield (use the variable 'user')-->
     <p>{{user}}</p>
-</form>
-<div class="flash-style" flash-message="2000"></div> 
+</form></div>
+      <div style="background-color:green;height:312px;" class="col-sm-12 col-md-6 jumbotron">
+        <h1>JUMBOTRON</h1>
+</div>
+    <div style="background-color:orange;height:312px;" class="col-sm-2 col-md-2">
+    </div>
+    <div style="background-color:teal;height:312px;" class="col-sm-8 col-md-8">
+    </div>
+    <div style="background-color:yellow;height:312px;" class="col-sm-2 col-md-2">
+    </div>
+    </div>
+    <div class="flash-style" flash-message="2000"></div> 
+  </div>
+   

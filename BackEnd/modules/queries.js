@@ -1,8 +1,6 @@
 var db = require('./database');
-
 var jwt = require('jsonwebtoken');
-
-var server = require('../index');
+var server = require('../server');
 
 /**
  *This function gets all documents from person collection
@@ -72,7 +70,7 @@ exports.deletePerson = function(req,res){
             db.Friends.update({username:req.session.kayttaja},{$pull:{'friends':{$in:toDelete}}},function(err,data){
                 if(err){
                     console.log(err);
-                    res.status(500).send({messsage:err.message});
+                    res.status(500).send({message:err.message});
                 }else{
                     
                     res.status(200).send({message:'Delete success'});
@@ -152,10 +150,9 @@ exports.loginFriend = function(req,res){
             //=< 0 means wrong username or password
             if(data){
                 req.session.kayttaja = data.username;
-                
                 //Create the token
                 var token = jwt.sign(data,server.secret,{expiresIn:'2h'});
-                res.send(200,{status:"Ok"});
+                res.send(200,{status:"Ok",secret:token});
             }
             else{
                 res.send(401,{status:"Wrong username or password"});

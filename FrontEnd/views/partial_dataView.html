@@ -1,6 +1,11 @@
-<a href="/logout">Logout</a>
-<a href="#/delete">Delete Information</a>
-<a href="#/insert">Insert New Friend</a>
+
+<ng-include src="'navbar.html'"></ng-include>
+ <!--use as attribute-->
+<div class="of-example"></div>
+<!--use as element-->
+<div class="of-example"></div>
+<div class="container">
+<div style="background-color:orange;height:312px;" class="col-sm-12 col-md-6">
 <div class='table_container'>
     <h1>Your friends...</h1>
     <p>To edit information, click the row</p>
@@ -23,7 +28,11 @@
                 <td>{{person.name}}</td>
                 <td>{{person.address}}</td>
                 <td>{{person.age}}</td>
-            </tr>
+            </tr> 
+        </div>
         </tbody>
     </table>
+  <of-example></of-example>
 </div>
+<div style="background-color:red;height:312px;" class="col-sm-12 col-md-6">
+  </div>  </div>
